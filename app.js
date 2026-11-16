@@ -6,7 +6,7 @@
 const CONFIG = {
   twitchChannel: 'kodaplaygames',
   // Paste your YouTube Channel ID (starts with 'UC...') once you upload your first episode
-  youtubeChannelId: '',
+  youtubeChannelId: 'UCwczCoIefVl4LqlIdN0Vqlw',
   rssToJsonEndpoint: 'https://api.rss2json.com/v1/api.json?rss_url=',
   youtubeRssBase: 'https://www.youtube.com/feeds/videos.xml?channel_id='
 };

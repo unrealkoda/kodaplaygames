@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>KodaPlayGames — Solo Campaigns, Getaways & Tactical Playthroughs</title>
+  <meta name="description" content="Official tactical creator hub for KodaPlayGames. Live console streams on Twitch Mon & Thurs 10AM UK, edited 15-30 min YouTube episodes, Shorts, and social intel." />
+
+  <!-- PWA & Mobile Home Screen Meta Tags (Relative paths for GitHub Pages + Custom Domain) -->
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#080b09" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="KodaPlayGames" />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" href="./assets/icon-192.png" />
+  <link rel="apple-touch-icon" href="./assets/icon-192.png" />
+
+  <!-- Google Fonts: Rajdhani (Tactical HUD Display) & Inter (Clean Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <!-- Subtle Carbon Grid & Tactical Ambient Glow -->
+  <div class="hud-grid-overlay" aria-hidden="true"></div>
+  <div class="hud-ambient-glow" aria-hidden="true"></div>
+
+  <!-- Top Sticky HUD Navigation -->
+  <nav class="top-nav">
+    <div class="container nav-inner">
+      <a href="#top" class="nav-brand">
+        <img src="./assets/logo-transparent.png" alt="KodaPlayGames Emblem" class="nav-logo" />
+        <span class="brand-wordmark">KODA<span class="neon-green">PLAY</span>GAMES</span>
+      </a>
+
+      <div class="nav-actions">
+        <a href="#broadcast-section" class="nav-link">Broadcast</a>
+        <a href="#youtube-section" class="nav-link">Episodes</a>
+        <a href="#social-section" class="nav-link">Intel</a>
+        <button id="pwa-install-btn" class="btn btn-hud-primary btn-sm hidden" aria-label="Install KodaPlayGames App">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Install App</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top" class="container main-content">
+    <!-- 1. TACTICAL HERO & BRAND IDENTITY -->
+    <header class="hero-hud-card">
+      <div class="hero-banner-bg" style="background-image: url('./assets/banner.png');" aria-hidden="true"></div>
+      <div class="hero-banner-scrim" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <div class="hero-top">
+          <div class="logo-stage">
+            <img src="./assets/logo-transparent.png" alt="KodaPlayGames Official Logo" class="hero-logo" />
+            <span class="mission-badge" id="hero-mission-badge">
+              <span class="status-dot"></span>
+              <span id="hero-mission-text">STANDBY // MON &amp; THURS 10AM UK</span>
+            </span>
+          </div>
+
+          <div class="hero-copy">
+            <p class="hud-kicker">SOLO CAMPAIGNS &bull; GETAWAYS &bull; TACTICAL PLAYTHROUGHS</p>
+            <h1 class="hero-title">KODA <span class="neon-green">PLAY</span> GAMES</h1>
+            <p class="hero-bio">
+              Console tactical gameplay, high-stakes getaways, and solo campaign missions streamed live on Twitch every Monday &amp; Thursday at 10:00 AM UK—edited into tight 15–30 minute episodes and Shorts.
+            </p>
+          </div>
+        </div>
+
+        <!-- 5 Charcoal Buttons with Platform Color Neon Hover Glow -->
+        <div class="platform-grid" aria-label="Official Social Channels">
+          <a href="https://twitch.tv/kodaplaygames" target="_blank" rel="noopener noreferrer" class="platform-btn glow-twitch">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+            <span>Twitch</span>
+          </a>
+
+          <a href="https://youtube.com/@kodaplaygames" target="_blank" rel="noopener noreferrer" class="platform-btn glow-youtube">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            <span>YouTube</span>
+          </a>
+
+          <a href="https://tiktok.com/@kodaplaygames" target="_blank" rel="noopener noreferrer" class="platform-btn glow-tiktok">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+            <span>TikTok</span>
+          </a>
+
+          <a href="https://instagram.com/kodaplaygames" target="_blank" rel="noopener noreferrer" class="platform-btn glow-instagram">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <span>Instagram</span>
+          </a>
+
+          <a href="https://x.com/kodaplaygames" target="_blank" rel="noopener noreferrer" class="platform-btn glow-x">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span>X / Twitter</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. TWITCH CONSOLE BROADCAST & OFFLINE MISSION HOLD -->
+    <section id="broadcast-section" class="section-block" aria-labelledby="broadcast-heading">
+      <div class="section-header">
+        <div class="section-title-group">
+          <span class="hud-bracket" aria-hidden="true">//</span>
+          <h2 id="broadcast-heading" class="section-title">Twitch Console Broadcast</h2>
+        </div>
+
+        <div class="section-controls">
+          <button id="toggle-mode-btn" class="btn btn-hud-secondary btn-sm" title="Switch between Live Twitch Player and Offline Mission Screen">
+            <span id="mode-btn-label">Show Offline Screen</span>
+          </button>
+          <button id="toggle-chat-btn" class="btn btn-hud-secondary btn-sm" aria-expanded="false" aria-controls="twitch-chat-wrapper">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span id="chat-btn-label">Open Comms Chat</span>
+          </button>
+          <a href="https://twitch.tv/kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-primary btn-sm">
+            Twitch Channel
+          </a>
+        </div>
+      </div>
+
+      <!-- Broadcast Stage -->
+      <div id="twitch-stage" class="twitch-stage">
+        <div class="broadcast-frame">
+          <!-- Live Twitch Player -->
+          <div id="live-player-container" class="twitch-player-wrapper">
+            <iframe
+              id="twitch-player-iframe"
+              title="KodaPlayGames Live Twitch Console Stream"
+              src=""
+              allowfullscreen="true"
+              scrolling="no"
+              loading="lazy">
+            </iframe>
+          </div>
+
+          <!-- Offline Tactical Screen (Uses offline.png) -->
+          <div id="offline-screen-container" class="offline-screen hidden" style="background-image: url('./assets/offline.png');">
+            <div class="offline-scrim">
+              <div class="offline-hud-box">
+                <span class="offline-tag">MISSION ON HOLD</span>
+                <h3>NEXT DEPLOYMENT IN</h3>
+                <div id="next-stream-countdown" class="countdown-readout">Calculating...</div>
+                <p class="offline-sub">Live on Twitch every Monday &amp; Thursday at 10:00 AM UK</p>
+                <div class="offline-actions">
+                  <button id="switch-to-live-btn" class="btn btn-hud-primary btn-sm">Load Twitch Player</button>
+                  <a href="#youtube-section" class="btn btn-hud-secondary btn-sm">Watch Edited Episodes</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toggleable Dark-Popout Twitch Chat -->
+        <div id="twitch-chat-wrapper" class="twitch-chat-wrapper hidden">
+          <iframe
+            id="twitch-chat-iframe"
+            title="KodaPlayGames Live Twitch Chat"
+            src=""
+            data-src=""
+            scrolling="no">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Official Deployment Schedule (Mon & Thurs 10AM UK + Auto Local Time) -->
+      <div class="schedule-hud-panel">
+        <div class="schedule-top">
+          <div>
+            <h3 class="schedule-heading">DEPLOYMENT SCHEDULE</h3>
+            <p class="schedule-note">Console streams broadcast exclusively on Twitch &bull; Auto-converted to your local time</p>
+          </div>
+          <span id="local-timezone-badge" class="hud-pill">UK TIME (GMT/BST)</span>
+        </div>
+
+        <div class="schedule-cards">
+          <div class="schedule-item">
+            <span class="day-code">MONDAY</span>
+            <strong class="uk-time">10:00 AM UK</strong>
+            <span class="local-time" id="mon-local-time">Local: 10:00 AM</span>
+            <span class="mission-type">Solo Campaigns &amp; Tactical Runs</span>
+          </div>
+
+          <div class="schedule-item">
+            <span class="day-code">THURSDAY</span>
+            <strong class="uk-time">10:00 AM UK</strong>
+            <span class="local-time" id="thu-local-time">Local: 10:00 AM</span>
+            <span class="mission-type">High-Stakes Getaways &amp; Challenges</span>
+          </div>
+
+          <div class="schedule-item highlight-slot">
+            <span class="day-code">NEXT STREAM COUNTDOWN</span>
+            <strong class="uk-time neon-green" id="schedule-countdown">--d --h --m</strong>
+            <span class="local-time" id="next-stream-label">Next: Monday 10:00 AM UK</span>
+            <span class="mission-type">Follow on Twitch for live push alerts</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. EDITED YOUTUBE EPISODES (15-30 MINS) & SHORTS -->
+    <section id="youtube-section" class="section-block" aria-labelledby="youtube-heading">
+      <div class="section-header">
+        <div class="section-title-group">
+          <span class="hud-bracket" aria-hidden="true">//</span>
+          <h2 id="youtube-heading" class="section-title">Edited Episodes (15–30m) &amp; Shorts</h2>
+          <span id="yt-feed-status" class="hud-pill">Syncing...</span>
+        </div>
+        <a href="https://youtube.com/@kodaplaygames" target="_blank" rel="noopener noreferrer" class="hud-link">
+          YouTube Channel &rarr;
+        </a>
+      </div>
+
+      <!-- YouTube Cards Grid (Auto-populated via RSS or Curated Demo Cards) -->
+      <div id="youtube-grid" class="video-grid" aria-live="polite">
+        <div class="video-card skeleton"></div>
+        <div class="video-card skeleton"></div>
+        <div class="video-card skeleton"></div>
+      </div>
+    </section>
+
+    <!-- 4. SHORT-FORM & SOCIAL INTEL FEED (TIKTOK, INSTAGRAM, X) -->
+    <section id="social-section" class="section-block" aria-labelledby="social-heading">
+      <div class="section-header">
+        <div class="section-title-group">
+          <span class="hud-bracket" aria-hidden="true">//</span>
+          <h2 id="social-heading" class="section-title">Field Clips &amp; Social Intel</h2>
+        </div>
+      </div>
+
+      <!-- Platform Switcher Tabs -->
+      <div class="feed-tabs" role="tablist" aria-label="Social Media Platforms">
+        <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-tiktok" id="tab-tiktok" data-target="panel-tiktok">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+          <span>TikTok Clips</span>
+        </button>
+
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-instagram" id="tab-instagram" data-target="panel-instagram">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>Instagram Reels</span>
+        </button>
+
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-x" id="tab-x" data-target="panel-x">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          <span>X / Comms</span>
+        </button>
+      </div>
+
+      <!-- Tab Panel 1: TikTok -->
+      <div id="panel-tiktok" class="tab-panel active" role="tabpanel" aria-labelledby="tab-tiktok">
+        <div class="social-grid">
+          <article class="clip-card">
+            <div class="clip-top">
+              <span class="clip-tag">TIKTOK // GETAWAY</span>
+              <span class="clip-stat">00:42</span>
+            </div>
+            <div class="clip-body">
+              <h4>Last-Second Alleyway Escape on 10% Armor</h4>
+              <p>Pinned three squad cars at the dockyard before slipping through the narrowest gap in the city.</p>
+              <a href="https://tiktok.com/@kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-secondary btn-sm">Watch on TikTok</a>
+            </div>
+          </article>
+
+          <article class="clip-card">
+            <div class="clip-top">
+              <span class="clip-tag">TIKTOK // TACTICAL</span>
+              <span class="clip-stat">00:58</span>
+            </div>
+            <div class="clip-body">
+              <h4>Zero-Alert Stealth Breach — Cleanest Clear Yet</h4>
+              <p>No alarms, no wasted ammo, full extraction under 60 seconds during Monday's campaign run.</p>
+              <a href="https://tiktok.com/@kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-secondary btn-sm">Watch on TikTok</a>
+            </div>
+          </article>
+
+          <article class="clip-card">
+            <div class="clip-top">
+              <span class="clip-tag">TIKTOK // HIGHLIGHT</span>
+              <span class="clip-stat">00:34</span>
+            </div>
+            <div class="clip-body">
+              <h4>When the Extraction Chopper Gets Ambushed</h4>
+              <p>Chat called the flank two seconds before the RPG came flying over the rooftop.</p>
+              <a href="https://tiktok.com/@kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-secondary btn-sm">Watch on TikTok</a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Tab Panel 2: Instagram -->
+      <div id="panel-instagram" class="tab-panel hidden" role="tabpanel" aria-labelledby="tab-instagram">
+        <div class="social-grid">
+          <article class="clip-card">
+            <div class="clip-top">
+              <span class="clip-tag">IG REEL // CAMPAIGN</span>
+              <span class="clip-stat">REEL</span>
+            </div>
+            <div class="clip-body">
+              <h4>Night Pursuit Highlights — Vice Streets</h4>
+              <p>Rain-slick roads, neon reflections, and a four-star pursuit edited into a 45-second reel.</p>
+              <a href="https://instagram.com/kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-secondary btn-sm">Open Instagram Reel</a>
+            </div>
+          </article>
+
+          <article class="clip-card">
+            <div class="clip-top">
+              <span class="clip-tag">IG REEL // LOADOUT</span>
+              <span class="clip-stat">REEL</span>
+            </div>
+            <div class="clip-body">
+              <h4>My Go-To Console Tactical Loadout &amp; Settings</h4>
+              <p>Controller sensitivity, HUD opacity, and audio mix settings I use for solo campaign runs.</p>
+              <a href="https://instagram.com/kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-secondary btn-sm">Open Instagram Reel</a>
+            </div>
+          </article>
+
+          <article class="clip-card">
+            <div class="clip-top">
+              <span class="clip-tag">IG POST // INTEL</span>
+              <span class="clip-stat">POST</span>
+            </div>
+            <div class="clip-body">
+              <h4>Next Solo Campaign Lineup Vote</h4>
+              <p>Drop your pick in the comments for next month's Monday &amp; Thursday playthrough series.</p>
+              <a href="https://instagram.com/kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-secondary btn-sm">View on Instagram</a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Tab Panel 3: X / Twitter -->
+      <div id="panel-x" class="tab-panel hidden" role="tabpanel" aria-labelledby="tab-x">
+        <div class="x-feed-grid">
+          <article class="x-post-card">
+            <div class="x-post-header">
+              <div class="x-author">
+                <img src="./assets/logo-transparent.png" alt="KodaPlayGames" class="x-avatar-img" />
+                <div>
+                  <strong>KodaPlayGames</strong>
+                  <span class="x-handle">@kodaplaygames</span>
+                </div>
+              </div>
+              <span class="hud-pill">PINNED</span>
+            </div>
+            <p class="x-body">
+              Official KodaPlayGames Command Hub is live! Save this page to your phone's home screen for instant Twitch access (Mon &amp; Thurs 10AM UK), 15–30 min edited YouTube episodes, and tactical clips.
+            </p>
+            <div class="x-footer">
+              <span>Live on Twitch &bull; Edited on YouTube</span>
+              <a href="https://x.com/kodaplaygames" target="_blank" rel="noopener noreferrer">Follow on X &rarr;</a>
+            </div>
+          </article>
+
+          <article class="x-post-card">
+            <div class="x-post-header">
+              <div class="x-author">
+                <img src="./assets/logo-transparent.png" alt="KodaPlayGames" class="x-avatar-img" />
+                <div>
+                  <strong>KodaPlayGames</strong>
+                  <span class="x-handle">@kodaplaygames</span>
+                </div>
+              </div>
+              <span class="x-time">DEPLOYMENT</span>
+            </div>
+            <p class="x-body">
+              Console stream kicks off at 10:00 AM UK on Twitch! Continuing our solo tactical playthrough—no HUD assists, hard difficulty. Join the comms early.
+            </p>
+            <div class="x-footer">
+              <span>Mon &amp; Thurs 10AM UK</span>
+              <a href="https://x.com/kodaplaygames" target="_blank" rel="noopener noreferrer">View Post &rarr;</a>
+            </div>
+          </article>
+
+          <article class="x-post-card">
+            <div class="x-post-header">
+              <div class="x-author">
+                <img src="./assets/logo-transparent.png" alt="KodaPlayGames" class="x-avatar-img" />
+                <div>
+                  <strong>KodaPlayGames</strong>
+                  <span class="x-handle">@kodaplaygames</span>
+                </div>
+              </div>
+              <span class="x-time">NEW EPISODE</span>
+            </div>
+            <p class="x-body">
+              New 22-minute edited episode just dropped on YouTube! Cut down from Thursday's getaway run with all the best chases and zero downtime.
+            </p>
+            <div class="x-footer">
+              <span>Edited 15–30m Cut</span>
+              <a href="https://x.com/kodaplaygames" target="_blank" rel="noopener noreferrer">View Post &rarr;</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Tactical Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="pwa-tip">
+        <strong>Mobile App Tip:</strong> On iPhone Safari tap <strong>Share &rarr; Add to Home Screen</strong>, or on Android Chrome tap <strong>Install App</strong> to launch KodaPlayGames full-screen.
+      </p>
+      <p class="copyright">&copy; <span id="current-year"></span> KodaPlayGames (kodaplaygames.com). Solo Campaigns &bull; Getaways &bull; Tactical Playthroughs.</p>
+    </div>
+  </footer>
+
+  <!-- Main Application Script -->
+  <script src="./app.js"></script>
+</body>
+</html>

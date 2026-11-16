@@ -1,0 +1,1020 @@
+/* ==========================================================================
+   KODAPLAYGAMES - TACTICAL OBSIDIAN & NEON GREEN CREATOR HUB STYLES
+   ========================================================================== */
+
+:root {
+  --bg-obsidian: #080b09;
+  --bg-carbon: #0f1411;
+  --bg-charcoal: #151c18;
+  --bg-charcoal-hover: #1b241f;
+  --bg-glass: rgba(11, 15, 13, 0.88);
+
+  --neon-green: #39ff14;
+  --neon-green-dim: #22c55e;
+  --neon-green-glow: rgba(57, 255, 20, 0.28);
+  --border-hud: rgba(57, 255, 20, 0.22);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  --text-primary: #f3f7f4;
+  --text-secondary: #9fb0a5;
+  --text-muted: #64756a;
+
+  /* Platform Hover Glow Colors */
+  --glow-twitch: #9146ff;
+  --glow-youtube: #ff1e1e;
+  --glow-tiktok: #00f2fe;
+  --glow-instagram: #e1306c;
+  --glow-x: #ffffff;
+
+  --font-display: 'Rajdhani', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-obsidian);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.neon-green {
+  color: var(--neon-green);
+}
+
+/* Tactical Carbon Grid & Ambient Glow */
+.hud-grid-overlay {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  z-index: -2;
+}
+
+.hud-ambient-glow {
+  position: fixed;
+  top: -220px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 960px;
+  height: 460px;
+  background: radial-gradient(circle, rgba(57, 255, 20, 0.14) 0%, rgba(34, 197, 94, 0.04) 48%, transparent 75%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ==========================================================================
+   TOP STICKY HUD NAVIGATION
+   ========================================================================== */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-hud);
+  padding-top: env(safe-area-inset-top);
+}
+
+.nav-inner {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(57, 255, 20, 0.4));
+}
+
+.brand-wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-link {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--neon-green);
+}
+
+/* ==========================================================================
+   TACTICAL BUTTONS
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-sm {
+  padding: 7px 14px;
+  font-size: 0.86rem;
+}
+
+.btn-hud-primary {
+  background: var(--neon-green);
+  color: #050806;
+  box-shadow: 0 0 16px rgba(57, 255, 20, 0.35);
+}
+
+.btn-hud-primary:hover {
+  background: #52ff33;
+  box-shadow: 0 0 22px rgba(57, 255, 20, 0.55);
+}
+
+.btn-hud-secondary {
+  background: var(--bg-charcoal);
+  border: 1px solid var(--border-hud);
+  color: var(--text-primary);
+}
+
+.btn-hud-secondary:hover {
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+  background: var(--bg-charcoal-hover);
+}
+
+/* ==========================================================================
+   1. HERO HUD CARD & TRANSPARENT LOGO
+   ========================================================================== */
+.main-content {
+  padding-top: 24px;
+  padding-bottom: 52px;
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+}
+
+.hero-hud-card {
+  position: relative;
+  background: var(--bg-carbon);
+  border: 1px solid var(--border-hud);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.75);
+}
+
+.hero-banner-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.26;
+  filter: contrast(1.1);
+}
+
+.hero-banner-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 11, 9, 0.65) 0%, rgba(15, 20, 17, 0.96) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 26px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.hero-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+}
+
+.logo-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-logo {
+  width: 126px;
+  height: 126px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px rgba(57, 255, 20, 0.45));
+}
+
+.mission-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: rgba(8, 11, 9, 0.85);
+  border: 1px solid var(--border-hud);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--neon-green);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--neon-green);
+  box-shadow: 0 0 10px var(--neon-green);
+  animation: pulseHud 1.8s infinite;
+}
+
+@keyframes pulseHud {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.25); }
+}
+
+.hud-kicker {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--neon-green);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 2.85rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  line-height: 1.05;
+  margin-top: 4px;
+}
+
+.hero-bio {
+  margin-top: 10px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  max-width: 650px;
+}
+
+/* ==========================================================================
+   5 CHARCOAL PLATFORM BUTTONS + NEON PLATFORM COLOR HOVER GLOW
+   ========================================================================== */
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.platform-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 16px;
+  background: var(--bg-charcoal);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  transition: transform 0.18s ease, border-color 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+}
+
+.platform-btn:hover,
+.platform-btn:focus-visible {
+  transform: translateY(-2px);
+  background: var(--bg-charcoal-hover);
+  outline: none;
+}
+
+/* Individual Platform Color Glows on Hover */
+.platform-btn.glow-twitch:hover,
+.platform-btn.glow-twitch:focus-visible {
+  border-color: var(--glow-twitch);
+  box-shadow: 0 0 18px rgba(145, 70, 255, 0.55), inset 0 0 10px rgba(145, 70, 255, 0.18);
+}
+
+.platform-btn.glow-youtube:hover,
+.platform-btn.glow-youtube:focus-visible {
+  border-color: var(--glow-youtube);
+  box-shadow: 0 0 18px rgba(255, 30, 30, 0.55), inset 0 0 10px rgba(255, 30, 30, 0.18);
+}
+
+.platform-btn.glow-tiktok:hover,
+.platform-btn.glow-tiktok:focus-visible {
+  border-color: var(--glow-tiktok);
+  box-shadow: 0 0 18px rgba(0, 242, 254, 0.5), inset 0 0 10px rgba(0, 242, 254, 0.16);
+}
+
+.platform-btn.glow-instagram:hover,
+.platform-btn.glow-instagram:focus-visible {
+  border-color: var(--glow-instagram);
+  box-shadow: 0 0 18px rgba(225, 48, 108, 0.55), inset 0 0 10px rgba(225, 48, 108, 0.18);
+}
+
+.platform-btn.glow-x:hover,
+.platform-btn.glow-x:focus-visible {
+  border-color: var(--glow-x);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.45), inset 0 0 10px rgba(255, 255, 255, 0.14);
+}
+
+.platform-btn:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+/* ==========================================================================
+   SECTION HEADERS & HUD ELEMENTS
+   ========================================================================== */
+.section-block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.section-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hud-bracket {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--neon-green);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.section-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.hud-pill {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: var(--bg-charcoal);
+  border: 1px solid var(--border-hud);
+  color: var(--neon-green);
+}
+
+.hud-link {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--neon-green);
+}
+
+.hud-link:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   2. TWITCH BROADCAST STAGE, OFFLINE SCREEN & SCHEDULE
+   ========================================================================== */
+.twitch-stage {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.broadcast-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #040605;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border-hud);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
+}
+
+.twitch-player-wrapper,
+.twitch-player-wrapper iframe,
+.twitch-chat-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Offline Screen using KodaPlayGamesOffline.jpg */
+.offline-screen {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.offline-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 11, 9, 0.76);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.offline-hud-box {
+  background: rgba(15, 20, 17, 0.92);
+  border: 1px solid var(--neon-green);
+  box-shadow: 0 0 28px rgba(57, 255, 20, 0.22);
+  border-radius: 10px;
+  padding: 20px 24px;
+  text-align: center;
+  max-width: 440px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.offline-tag {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--neon-green);
+  background: rgba(57, 255, 20, 0.12);
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+.offline-hud-box h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.countdown-readout {
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 4vw, 2.35rem);
+  font-weight: 700;
+  color: var(--neon-green);
+  text-shadow: 0 0 14px rgba(57, 255, 20, 0.4);
+  letter-spacing: 0.04em;
+}
+
+.offline-sub {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+}
+
+.offline-actions {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.twitch-chat-wrapper {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background: var(--bg-carbon);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border-hud);
+}
+
+/* Schedule HUD Panel */
+.schedule-hud-panel {
+  background: var(--bg-carbon);
+  border: 1px solid var(--border-hud);
+  border-radius: 10px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.schedule-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.schedule-heading {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.schedule-note {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.schedule-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.schedule-item {
+  background: var(--bg-charcoal);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.schedule-item.highlight-slot {
+  border-color: var(--border-hud);
+  background: linear-gradient(145deg, var(--bg-charcoal) 0%, rgba(57, 255, 20, 0.07) 100%);
+}
+
+.day-code {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--neon-green);
+}
+
+.uk-time {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.local-time {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mission-type {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   3. EDITED YOUTUBE EPISODES (15-30m) & SHORTS
+   ========================================================================== */
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.video-card {
+  background: var(--bg-carbon);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--neon-green);
+  box-shadow: 0 10px 24px rgba(57, 255, 20, 0.14);
+}
+
+.video-thumb-wrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--bg-charcoal);
+  overflow: hidden;
+}
+
+.video-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(8, 11, 9, 0.92);
+  border: 1px solid var(--neon-green);
+  color: var(--neon-green);
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.video-badge.short-badge {
+  border-color: #ff1e1e;
+  color: #ff4d4d;
+}
+
+.video-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.video-title {
+  font-size: 0.96rem;
+  font-weight: 700;
+  line-height: 1.38;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.video-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: auto;
+}
+
+.video-card.skeleton {
+  height: 235px;
+  background: linear-gradient(90deg, var(--bg-carbon) 25%, var(--bg-charcoal) 50%, var(--bg-carbon) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ==========================================================================
+   4. SOCIAL INTEL TABS & CARDS
+   ========================================================================== */
+.feed-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.feed-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 6px;
+  background: var(--bg-charcoal);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hud);
+}
+
+.tab-btn.active {
+  background: var(--neon-green);
+  border-color: var(--neon-green);
+  color: #050806;
+  box-shadow: 0 0 16px rgba(57, 255, 20, 0.35);
+}
+
+.social-grid,
+.x-feed-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.clip-card,
+.x-post-card {
+  background: var(--bg-carbon);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.2s ease;
+}
+
+.clip-card:hover,
+.x-post-card:hover {
+  border-color: var(--border-hud);
+}
+
+.clip-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.clip-tag {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--neon-green);
+}
+
+.clip-stat {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.clip-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1;
+}
+
+.clip-body h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.clip-body p {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.clip-body .btn {
+  margin-top: auto;
+}
+
+/* X / Comms Cards */
+.x-post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.x-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.x-avatar-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  background: var(--bg-charcoal);
+  border: 1px solid var(--border-hud);
+  border-radius: 50%;
+  padding: 3px;
+}
+
+.x-author strong {
+  display: block;
+  font-size: 0.92rem;
+  line-height: 1.2;
+}
+
+.x-handle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.x-time {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.x-body {
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.x-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding-top: 8px;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: auto;
+}
+
+.x-footer a {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--neon-green);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.site-footer {
+  border-top: 1px solid var(--border-hud);
+  padding: 24px 0 36px;
+  text-align: center;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.pwa-tip {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  background: var(--bg-carbon);
+  border: 1px solid var(--border-hud);
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+@media (min-width: 640px) {
+  .platform-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .platform-btn:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+
+  .schedule-cards,
+  .video-grid,
+  .social-grid,
+  .x-feed-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 920px) {
+  .hero-top {
+    flex-direction: row;
+    text-align: left;
+    gap: 26px;
+  }
+
+  .twitch-stage.chat-open {
+    grid-template-columns: 1fr 340px;
+  }
+
+  .twitch-stage.chat-open .twitch-chat-wrapper {
+    height: 100%;
+    min-height: 410px;
+  }
+
+  .schedule-cards,
+  .video-grid,
+  .social-grid,
+  .x-feed-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

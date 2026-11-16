@@ -4,7 +4,7 @@
  * and after switching to your custom root domain (kodaplaygames.com).
  */
 
-const CACHE_NAME = 'kodaplaygames-tactical-v3';
+const CACHE_NAME = 'kodaplaygames-tactical-v4';
 const APP_SHELL_ASSETS = [
   './',
   './index.html',

@@ -1,20 +1,22 @@
 /**
  * KodaPlayGames Tactical Creator Hub
  * Built for GitHub Pages + Custom Domain (kodaplaygames.com)
+ * - Shows custom Offline Tactical Screen + Countdown by default
+ * - Automatically checks live Twitch status and switches to Live Player when streaming
  */
 
 const CONFIG = {
   twitchChannel: 'kodaplaygames',
   // Paste your YouTube Channel ID (starts with 'UC...') once you upload your first episode
-  youtubeChannelId: 'UCwczCoIefVl4LqlIdN0Vqlw',
+  youtubeChannelId: '',
   rssToJsonEndpoint: 'https://api.rss2json.com/v1/api.json?rss_url=',
-  youtubeRssBase: 'https://www.youtube.com/feeds/videos.xml?channel_id='
+  youtubeRssBase: 'https://www.youtube.com/feeds/videos.xml?channel_id=',
+  twitchUptimeEndpoint: 'https://decapi.me/twitch/uptime/'
 };
 
 document.addEventListener('DOMContentLoaded', () => {
   initFooterYear();
-  initTwitchEmbeds();
-  initBroadcastControls();
+  initTwitchAndLiveCheck();
   initScheduleAndCountdown();
   loadYouTubeFeed();
   initSocialTabs();
@@ -29,12 +31,26 @@ function initFooterYear() {
   }
 }
 
-/* 2. Configure Twitch Embeds Dynamically (Works on github.io, localhost, and kodaplaygames.com) */
-function initTwitchEmbeds() {
+/* 2. Configure Twitch Embeds + Auto-Switch Between Offline & Live Stream */
+function initTwitchAndLiveCheck() {
   const playerIframe = document.getElementById('twitch-player-iframe');
   const chatIframe = document.getElementById('twitch-chat-iframe');
+  const toggleModeBtn = document.getElementById('toggle-mode-btn');
+  const switchToLiveBtn = document.getElementById('switch-to-live-btn');
+  const modeBtnLabel = document.getElementById('mode-btn-label');
+  const liveContainer = document.getElementById('live-player-container');
+  const offlineContainer = document.getElementById('offline-screen-container');
+  const streamStatePill = document.getElementById('stream-state-pill');
+  const heroMissionText = document.getElementById('hero-mission-text');
+
+  const toggleChatBtn = document.getElementById('toggle-chat-btn');
+  const chatWrapper = document.getElementById('twitch-chat-wrapper');
+  const twitchStage = document.getElementById('twitch-stage');
+  const chatBtnLabel = document.getElementById('chat-btn-label');
+
   if (!playerIframe || !chatIframe) return;
 
+  // Build parent domains dynamically (supports github.io, localhost, and kodaplaygames.com)
   const currentHost = window.location.hostname;
   const parents = new Set([
     'kodaplaygames.com',
@@ -42,7 +58,6 @@ function initTwitchEmbeds() {
     'localhost',
     '127.0.0.1'
   ]);
-
   if (currentHost) {
     parents.add(currentHost);
   }
@@ -51,49 +66,74 @@ function initTwitchEmbeds() {
     .map((host) => `parent=${encodeURIComponent(host)}`)
     .join('&');
 
-  playerIframe.src = `https://player.twitch.tv/?channel=${CONFIG.twitchChannel}&${parentParams}&muted=true`;
-  chatIframe.dataset.src = `https://www.twitch.tv/embed/${CONFIG.twitchChannel}/chat?${parentParams}&darkpopout`;
-}
+  const playerUrl = `https://player.twitch.tv/?channel=${CONFIG.twitchChannel}&${parentParams}&muted=true`;
+  const chatUrl = `https://www.twitch.tv/embed/${CONFIG.twitchChannel}/chat?${parentParams}&darkpopout`;
 
-/* 3. Broadcast Stage Controls (Live/Offline Toggle + Comms Chat Toggle) */
-function initBroadcastControls() {
-  const toggleModeBtn = document.getElementById('toggle-mode-btn');
-  const switchToLiveBtn = document.getElementById('switch-to-live-btn');
-  const modeBtnLabel = document.getElementById('mode-btn-label');
-  const liveContainer = document.getElementById('live-player-container');
-  const offlineContainer = document.getElementById('offline-screen-container');
+  playerIframe.dataset.src = playerUrl;
+  chatIframe.dataset.src = chatUrl;
 
-  const toggleChatBtn = document.getElementById('toggle-chat-btn');
-  const chatWrapper = document.getElementById('twitch-chat-wrapper');
-  const chatIframe = document.getElementById('twitch-chat-iframe');
-  const twitchStage = document.getElementById('twitch-stage');
-  const chatBtnLabel = document.getElementById('chat-btn-label');
-
-  function setOfflineMode(showOffline) {
+  function setViewMode(showLive) {
     if (!liveContainer || !offlineContainer || !modeBtnLabel) return;
-    if (showOffline) {
-      liveContainer.classList.add('hidden');
-      offlineContainer.classList.remove('hidden');
-      modeBtnLabel.textContent = 'Show Twitch Player';
-    } else {
+
+    if (showLive) {
+      if (!playerIframe.src && playerIframe.dataset.src) {
+        playerIframe.src = playerIframe.dataset.src;
+      }
       offlineContainer.classList.add('hidden');
       liveContainer.classList.remove('hidden');
       modeBtnLabel.textContent = 'Show Offline Screen';
+    } else {
+      liveContainer.classList.add('hidden');
+      offlineContainer.classList.remove('hidden');
+      modeBtnLabel.textContent = 'Show Twitch Player';
     }
   }
 
+  // Default to Offline Screen on initial load
+  setViewMode(false);
+
+  // Check if KodaPlayGames is currently LIVE on Twitch
+  async function checkLiveStatus() {
+    try {
+      const response = await fetch(`${CONFIG.twitchUptimeEndpoint}${encodeURIComponent(CONFIG.twitchChannel)}`);
+      if (!response.ok) return;
+
+      const text = (await response.text()).trim().toLowerCase();
+      const isOffline = text.includes('offline') || text.includes('not found') || text.includes('error');
+
+      if (!isOffline && text.length > 0) {
+        // Channel is LIVE! Automatically switch to Twitch Player & update status badges
+        setViewMode(true);
+        if (streamStatePill) {
+          streamStatePill.textContent = 'LIVE NOW';
+          streamStatePill.style.borderColor = '#ef4444';
+          streamStatePill.style.color = '#ef4444';
+        }
+        if (heroMissionText) {
+          heroMissionText.textContent = 'LIVE NOW // STREAMING ON TWITCH';
+        }
+      }
+    } catch (_) {
+      // If network check fails, stay cleanly on the Offline Screen
+    }
+  }
+
+  checkLiveStatus();
+
+  // Manual toggle buttons
   if (toggleModeBtn) {
     toggleModeBtn.addEventListener('click', () => {
-      const isCurrentlyOffline = !offlineContainer.classList.contains('hidden');
-      setOfflineMode(!isCurrentlyOffline);
+      const isCurrentlyLive = !liveContainer.classList.contains('hidden');
+      setViewMode(!isCurrentlyLive);
     });
   }
 
   if (switchToLiveBtn) {
-    switchToLiveBtn.addEventListener('click', () => setOfflineMode(false));
+    switchToLiveBtn.addEventListener('click', () => setViewMode(true));
   }
 
-  if (toggleChatBtn && chatWrapper && chatIframe) {
+  // Toggleable Comms Chat
+  if (toggleChatBtn && chatWrapper) {
     toggleChatBtn.addEventListener('click', () => {
       const isHidden = chatWrapper.classList.contains('hidden');
       if (isHidden) {
@@ -114,7 +154,7 @@ function initBroadcastControls() {
   }
 }
 
-/* 4. Mon & Thurs 10:00 AM UK Schedule Local Timezone Converter & Live Countdown */
+/* 3. Mon & Thurs 10:00 AM UK Schedule Local Timezone Converter & Live Countdown */
 function initScheduleAndCountdown() {
   const monLocalEl = document.getElementById('mon-local-time');
   const thuLocalEl = document.getElementById('thu-local-time');
@@ -195,7 +235,7 @@ function initScheduleAndCountdown() {
   setInterval(updateCountdown, 1000);
 }
 
-/* 5. Fetch Latest YouTube Edited Episodes (15-30m) & Shorts via RSS (with Clean Standby State) */
+/* 4. Fetch Latest YouTube Edited Episodes (15-30m) & Shorts via RSS (with Clean Standby State) */
 async function loadYouTubeFeed() {
   const gridEl = document.getElementById('youtube-grid');
   const statusEl = document.getElementById('yt-feed-status');
@@ -279,7 +319,7 @@ function renderYouTubeCards(videos) {
     .join('');
 }
 
-/* 6. Social Intel Tabs (TikTok, Instagram, X) */
+/* 5. Social Intel Tabs (TikTok, Instagram, X) */
 function initSocialTabs() {
   const tabButtons = document.querySelectorAll('.tab-btn');
   const tabPanels = document.querySelectorAll('.tab-panel');
@@ -310,7 +350,7 @@ function initSocialTabs() {
   });
 }
 
-/* 7. Progressive Web App Registration & Home-Screen Install Prompt */
+/* 6. Progressive Web App Registration & Home-Screen Install Prompt */
 function initPWA() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {

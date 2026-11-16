@@ -70,7 +70,7 @@
             <p class="hud-kicker">SOLO CAMPAIGNS &bull; GETAWAYS &bull; TACTICAL PLAYTHROUGHS</p>
             <h1 class="hero-title">KODA <span class="neon-green">PLAY</span> GAMES</h1>
             <p class="hero-bio">
-              Console tactical gameplay, high-stakes getaways, and solo campaign missions streamed live on Twitch every Monday &amp; Thursday at 10:00 AM UK-edited into tight 15-30 minute episodes and Shorts.
+              Console tactical gameplay, high-stakes getaways, and solo campaign missions streamed live on Twitch every Monday &amp; Thursday at 10:00 AM UK-edited into tight 15–30 minute episodes and Shorts.
             </p>
           </div>
         </div>
@@ -111,11 +111,12 @@
         <div class="section-title-group">
           <span class="hud-bracket" aria-hidden="true">//</span>
           <h2 id="broadcast-heading" class="section-title">Twitch Console Broadcast</h2>
+          <span id="stream-state-pill" class="hud-pill">OFFLINE</span>
         </div>
 
         <div class="section-controls">
-          <button id="toggle-mode-btn" class="btn btn-hud-secondary btn-sm" title="Switch between Live Twitch Player and Offline Mission Screen">
-            <span id="mode-btn-label">Show Offline Screen</span>
+          <button id="toggle-mode-btn" class="btn btn-hud-secondary btn-sm" title="Switch between Offline Mission Screen and Twitch Player">
+            <span id="mode-btn-label">Show Twitch Player</span>
           </button>
           <button id="toggle-chat-btn" class="btn btn-hud-secondary btn-sm" aria-expanded="false" aria-controls="twitch-chat-wrapper">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -127,23 +128,23 @@
         </div>
       </div>
 
-      <!-- Broadcast Stage -->
+      <!-- Broadcast Stage (Offline screen visible by default; auto-switches to Live if streaming) -->
       <div id="twitch-stage" class="twitch-stage">
         <div class="broadcast-frame">
-          <!-- Live Twitch Player -->
-          <div id="live-player-container" class="twitch-player-wrapper">
+          <!-- Live Twitch Player (Hidden until live or manually toggled) -->
+          <div id="live-player-container" class="twitch-player-wrapper hidden">
             <iframe
               id="twitch-player-iframe"
               title="KodaPlayGames Live Twitch Console Stream"
               src=""
+              data-src=""
               allowfullscreen="true"
-              scrolling="no"
-              loading="lazy">
+              scrolling="no">
             </iframe>
           </div>
 
-          <!-- Offline Tactical Screen (Uses offline.png) -->
-          <div id="offline-screen-container" class="offline-screen hidden" style="background-image: url('./assets/offline.png');">
+          <!-- Offline Tactical Screen (Default view when not streaming) -->
+          <div id="offline-screen-container" class="offline-screen" style="background-image: url('./assets/offline.png');">
             <div class="offline-scrim">
               <div class="offline-hud-box">
                 <span class="offline-tag">MISSION ON HOLD</span>
@@ -151,8 +152,8 @@
                 <div id="next-stream-countdown" class="countdown-readout">Calculating...</div>
                 <p class="offline-sub">Live on Twitch every Monday &amp; Thursday at 10:00 AM UK</p>
                 <div class="offline-actions">
-                  <button id="switch-to-live-btn" class="btn btn-hud-primary btn-sm">Load Twitch Player</button>
-                  <a href="https://twitch.tv/kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-secondary btn-sm">Follow on Twitch</a>
+                  <button id="switch-to-live-btn" class="btn btn-hud-secondary btn-sm">Load Twitch Player</button>
+                  <a href="https://twitch.tv/kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-primary btn-sm">Follow on Twitch</a>
                 </div>
               </div>
             </div>
@@ -219,7 +220,6 @@
         </a>
       </div>
 
-      <!-- Populated automatically via app.js (shows clean Coming Soon state until videos are uploaded) -->
       <div id="youtube-grid" class="video-grid" aria-live="polite"></div>
     </section>
 
@@ -250,7 +250,7 @@
         </button>
       </div>
 
-      <!-- Tab Panel 1: TikTok Empty/Standby State -->
+      <!-- Tab Panel 1: TikTok -->
       <div id="panel-tiktok" class="tab-panel active" role="tabpanel" aria-labelledby="tab-tiktok">
         <div class="empty-hud-state">
           <span class="hud-pill">TIKTOK FEED // STANDBY</span>
@@ -260,7 +260,7 @@
         </div>
       </div>
 
-      <!-- Tab Panel 2: Instagram Empty/Standby State -->
+      <!-- Tab Panel 2: Instagram -->
       <div id="panel-instagram" class="tab-panel hidden" role="tabpanel" aria-labelledby="tab-instagram">
         <div class="empty-hud-state">
           <span class="hud-pill">INSTAGRAM // STANDBY</span>
@@ -270,7 +270,7 @@
         </div>
       </div>
 
-      <!-- Tab Panel 3: X / Twitter Empty/Standby State -->
+      <!-- Tab Panel 3: X / Twitter -->
       <div id="panel-x" class="tab-panel hidden" role="tabpanel" aria-labelledby="tab-x">
         <div class="empty-hud-state">
           <span class="hud-pill">X COMMS // STANDBY</span>

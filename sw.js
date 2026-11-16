@@ -4,7 +4,7 @@
  * and after switching to your custom root domain (kodaplaygames.com).
  */
 
-const CACHE_NAME = 'kodaplaygames-tactical-v2';
+const CACHE_NAME = 'kodaplaygames-tactical-v3';
 const APP_SHELL_ASSETS = [
   './',
   './index.html',
@@ -18,7 +18,6 @@ const APP_SHELL_ASSETS = [
   './assets/icon-512.png'
 ];
 
-// Install: Pre-cache core app shell and brand assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -28,7 +27,6 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Activate: Clean up old cache versions
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -42,11 +40,9 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch: Network-first for HTML navigation, Cache-first for static local assets
 self.addEventListener('fetch', (event) => {
   const { request } = event;
 
-  // Let third-party embeds and RSS requests bypass the local cache
   if (!request.url.startsWith(self.location.origin)) {
     return;
   }

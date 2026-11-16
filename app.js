@@ -1,51 +1,15 @@
 /**
  * KodaPlayGames Tactical Creator Hub
  * Built for GitHub Pages + Custom Domain (kodaplaygames.com)
- * Features:
- * - Dynamic Twitch parent domain detection (supports github.io, localhost, and kodaplaygames.com)
- * - Live Twitch Player & Offline Mission Hold switcher + UK-to-Local timezone schedule converter
- * - YouTube RSS feed loader for 15-30 min edited episodes & Shorts (with demo fallback)
- * - Social Intel tabs & Standalone PWA installer
  */
 
 const CONFIG = {
   twitchChannel: 'kodaplaygames',
-  // Paste your YouTube Channel ID (starts with 'UC...') below to auto-sync your latest uploads
+  // Paste your YouTube Channel ID (starts with 'UC...') once you upload your first episode
   youtubeChannelId: '',
   rssToJsonEndpoint: 'https://api.rss2json.com/v1/api.json?rss_url=',
   youtubeRssBase: 'https://www.youtube.com/feeds/videos.xml?channel_id='
 };
-
-// Demo fallback cards representing your 15-30 min edited YouTube episodes & Shorts
-const DEMO_YOUTUBE_VIDEOS = [
-  {
-    id: 'ep-01',
-    title: 'Zero-Alert Compound Infiltration — Edited Campaign Episode (24:15)',
-    thumbnail: './assets/banner.png',
-    url: 'https://youtube.com/@kodaplaygames',
-    published: '2 days ago',
-    durationTag: 'EPISODE • 24:15',
-    isShort: false
-  },
-  {
-    id: 'short-01',
-    title: 'Four-Star Dockyard Escape on 10% Armor #Shorts',
-    thumbnail: './assets/offline.png',
-    url: 'https://youtube.com/@kodaplaygames',
-    published: '4 days ago',
-    durationTag: 'SHORT',
-    isShort: true
-  },
-  {
-    id: 'ep-02',
-    title: 'High-Stakes Midnight Convoy Ambush — Tactical Playthrough (19:40)',
-    thumbnail: './assets/banner.png',
-    url: 'https://youtube.com/@kodaplaygames',
-    published: '1 week ago',
-    durationTag: 'EPISODE • 19:40',
-    isShort: false
-  }
-];
 
 document.addEventListener('DOMContentLoaded', () => {
   initFooterYear();
@@ -231,15 +195,15 @@ function initScheduleAndCountdown() {
   setInterval(updateCountdown, 1000);
 }
 
-/* 5. Fetch Latest YouTube Edited Episodes (15-30m) & Shorts via RSS */
+/* 5. Fetch Latest YouTube Edited Episodes (15-30m) & Shorts via RSS (with Clean Standby State) */
 async function loadYouTubeFeed() {
   const gridEl = document.getElementById('youtube-grid');
   const statusEl = document.getElementById('yt-feed-status');
   if (!gridEl) return;
 
   if (!CONFIG.youtubeChannelId || CONFIG.youtubeChannelId.trim() === '') {
-    renderYouTubeCards(DEMO_YOUTUBE_VIDEOS);
-    if (statusEl) statusEl.textContent = '15–30m Edited Cuts';
+    renderEmptyYouTubeState(gridEl);
+    if (statusEl) statusEl.textContent = 'First Episode Incoming';
     return;
   }
 
@@ -250,7 +214,7 @@ async function loadYouTubeFeed() {
 
     const data = await response.json();
     if (data.status !== 'ok' || !Array.isArray(data.items) || data.items.length === 0) {
-      throw new Error('Empty YouTube feed');
+      throw new Error('No uploads published yet');
     }
 
     const videos = data.items.slice(0, 6).map((item) => {
@@ -274,10 +238,21 @@ async function loadYouTubeFeed() {
     renderYouTubeCards(videos);
     if (statusEl) statusEl.textContent = 'Live Channel Sync';
   } catch (err) {
-    console.warn('Using fallback YouTube episode cards:', err.message);
-    renderYouTubeCards(DEMO_YOUTUBE_VIDEOS);
-    if (statusEl) statusEl.textContent = '15–30m Edited Cuts';
+    console.info('YouTube channel awaiting first upload:', err.message);
+    renderEmptyYouTubeState(gridEl);
+    if (statusEl) statusEl.textContent = 'First Episode Incoming';
   }
+}
+
+function renderEmptyYouTubeState(gridEl) {
+  gridEl.innerHTML = `
+    <div class="empty-hud-state">
+      <span class="hud-pill">YOUTUBE ARCHIVE // STANDBY</span>
+      <h3>First 15–30 Minute Edited Episode In Production</h3>
+      <p>Edited gameplay episodes and Shorts cut from the Monday &amp; Thursday 10:00 AM UK Twitch streams will automatically appear here as soon as they drop.</p>
+      <a href="https://youtube.com/@kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-primary btn-sm">Subscribe on YouTube</a>
+    </div>
+  `;
 }
 
 function renderYouTubeCards(videos) {

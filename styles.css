@@ -370,7 +370,6 @@ button {
   outline: none;
 }
 
-/* Individual Platform Color Glows on Hover */
 .platform-btn.glow-twitch:hover,
 .platform-btn.glow-twitch:focus-visible {
   border-color: var(--glow-twitch);
@@ -506,7 +505,6 @@ button {
   border: 0;
 }
 
-/* Offline Screen using KodaPlayGamesOffline.jpg */
 .offline-screen {
   position: absolute;
   inset: 0;
@@ -670,7 +668,7 @@ button {
 }
 
 /* ==========================================================================
-   3. EDITED YOUTUBE EPISODES (15-30m) & SHORTS
+   3. EDITED YOUTUBE EPISODES (15-30m) & SHORTS + STANDBY STATE
    ========================================================================== */
 .video-grid {
   display: grid;
@@ -752,20 +750,37 @@ button {
   margin-top: auto;
 }
 
-.video-card.skeleton {
-  height: 235px;
-  background: linear-gradient(90deg, var(--bg-carbon) 25%, var(--bg-charcoal) 50%, var(--bg-carbon) 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.4s infinite;
+/* Clean Tactical Empty / Standby State Panel */
+.empty-hud-state {
+  grid-column: 1 / -1;
+  background: var(--bg-carbon);
+  border: 1px dashed var(--border-hud);
+  border-radius: 10px;
+  padding: 28px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+.empty-hud-state h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.empty-hud-state p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  max-width: 540px;
+  margin-bottom: 4px;
 }
 
 /* ==========================================================================
-   4. SOCIAL INTEL TABS & CARDS
+   4. SOCIAL INTEL TABS
    ========================================================================== */
 .feed-tabs {
   display: flex;
@@ -807,142 +822,6 @@ button {
   border-color: var(--neon-green);
   color: #050806;
   box-shadow: 0 0 16px rgba(57, 255, 20, 0.35);
-}
-
-.social-grid,
-.x-feed-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-}
-
-.clip-card,
-.x-post-card {
-  background: var(--bg-carbon);
-  border: 1px solid var(--border-subtle);
-  border-radius: 10px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  transition: border-color 0.2s ease;
-}
-
-.clip-card:hover,
-.x-post-card:hover {
-  border-color: var(--border-hud);
-}
-
-.clip-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.clip-tag {
-  font-family: var(--font-display);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: var(--neon-green);
-}
-
-.clip-stat {
-  font-family: var(--font-display);
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--text-muted);
-}
-
-.clip-body {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  flex: 1;
-}
-
-.clip-body h4 {
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.35;
-}
-
-.clip-body p {
-  font-size: 0.86rem;
-  color: var(--text-secondary);
-  margin-bottom: 6px;
-}
-
-.clip-body .btn {
-  margin-top: auto;
-}
-
-/* X / Comms Cards */
-.x-post-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.x-author {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.x-avatar-img {
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-  background: var(--bg-charcoal);
-  border: 1px solid var(--border-hud);
-  border-radius: 50%;
-  padding: 3px;
-}
-
-.x-author strong {
-  display: block;
-  font-size: 0.92rem;
-  line-height: 1.2;
-}
-
-.x-handle {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-.x-time {
-  font-family: var(--font-display);
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--text-muted);
-}
-
-.x-body {
-  font-size: 0.92rem;
-  color: var(--text-primary);
-  line-height: 1.5;
-}
-
-.x-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  padding-top: 8px;
-  border-top: 1px solid var(--border-subtle);
-  margin-top: auto;
-}
-
-.x-footer a {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.88rem;
-  color: var(--neon-green);
 }
 
 /* ==========================================================================
@@ -988,9 +867,7 @@ button {
   }
 
   .schedule-cards,
-  .video-grid,
-  .social-grid,
-  .x-feed-grid {
+  .video-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -1012,9 +889,7 @@ button {
   }
 
   .schedule-cards,
-  .video-grid,
-  .social-grid,
-  .x-feed-grid {
+  .video-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }

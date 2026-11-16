@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>KodaPlayGames — Solo Campaigns, Getaways & Tactical Playthroughs</title>
+  <title>KodaPlayGames - Solo Campaigns, Getaways & Tactical Playthroughs</title>
   <meta name="description" content="Official tactical creator hub for KodaPlayGames. Live console streams on Twitch Mon & Thurs 10AM UK, edited 15-30 min YouTube episodes, Shorts, and social intel." />
 
-  <!-- PWA & Mobile Home Screen Meta Tags (Relative paths for GitHub Pages + Custom Domain) -->
+  <!-- PWA & Mobile Home Screen Meta Tags -->
   <link rel="manifest" href="./manifest.json" />
   <meta name="theme-color" content="#080b09" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -70,7 +70,7 @@
             <p class="hud-kicker">SOLO CAMPAIGNS &bull; GETAWAYS &bull; TACTICAL PLAYTHROUGHS</p>
             <h1 class="hero-title">KODA <span class="neon-green">PLAY</span> GAMES</h1>
             <p class="hero-bio">
-              Console tactical gameplay, high-stakes getaways, and solo campaign missions streamed live on Twitch every Monday &amp; Thursday at 10:00 AM UK—edited into tight 15–30 minute episodes and Shorts.
+              Console tactical gameplay, high-stakes getaways, and solo campaign missions streamed live on Twitch every Monday &amp; Thursday at 10:00 AM UK-edited into tight 15-30 minute episodes and Shorts.
             </p>
           </div>
         </div>
@@ -152,7 +152,7 @@
                 <p class="offline-sub">Live on Twitch every Monday &amp; Thursday at 10:00 AM UK</p>
                 <div class="offline-actions">
                   <button id="switch-to-live-btn" class="btn btn-hud-primary btn-sm">Load Twitch Player</button>
-                  <a href="#youtube-section" class="btn btn-hud-secondary btn-sm">Watch Edited Episodes</a>
+                  <a href="https://twitch.tv/kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-secondary btn-sm">Follow on Twitch</a>
                 </div>
               </div>
             </div>
@@ -212,19 +212,15 @@
         <div class="section-title-group">
           <span class="hud-bracket" aria-hidden="true">//</span>
           <h2 id="youtube-heading" class="section-title">Edited Episodes (15–30m) &amp; Shorts</h2>
-          <span id="yt-feed-status" class="hud-pill">Syncing...</span>
+          <span id="yt-feed-status" class="hud-pill">Standby</span>
         </div>
         <a href="https://youtube.com/@kodaplaygames" target="_blank" rel="noopener noreferrer" class="hud-link">
           YouTube Channel &rarr;
         </a>
       </div>
 
-      <!-- YouTube Cards Grid (Auto-populated via RSS or Curated Demo Cards) -->
-      <div id="youtube-grid" class="video-grid" aria-live="polite">
-        <div class="video-card skeleton"></div>
-        <div class="video-card skeleton"></div>
-        <div class="video-card skeleton"></div>
-      </div>
+      <!-- Populated automatically via app.js (shows clean Coming Soon state until videos are uploaded) -->
+      <div id="youtube-grid" class="video-grid" aria-live="polite"></div>
     </section>
 
     <!-- 4. SHORT-FORM & SOCIAL INTEL FEED (TIKTOK, INSTAGRAM, X) -->
@@ -254,150 +250,33 @@
         </button>
       </div>
 
-      <!-- Tab Panel 1: TikTok -->
+      <!-- Tab Panel 1: TikTok Empty/Standby State -->
       <div id="panel-tiktok" class="tab-panel active" role="tabpanel" aria-labelledby="tab-tiktok">
-        <div class="social-grid">
-          <article class="clip-card">
-            <div class="clip-top">
-              <span class="clip-tag">TIKTOK // GETAWAY</span>
-              <span class="clip-stat">00:42</span>
-            </div>
-            <div class="clip-body">
-              <h4>Last-Second Alleyway Escape on 10% Armor</h4>
-              <p>Pinned three squad cars at the dockyard before slipping through the narrowest gap in the city.</p>
-              <a href="https://tiktok.com/@kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-secondary btn-sm">Watch on TikTok</a>
-            </div>
-          </article>
-
-          <article class="clip-card">
-            <div class="clip-top">
-              <span class="clip-tag">TIKTOK // TACTICAL</span>
-              <span class="clip-stat">00:58</span>
-            </div>
-            <div class="clip-body">
-              <h4>Zero-Alert Stealth Breach — Cleanest Clear Yet</h4>
-              <p>No alarms, no wasted ammo, full extraction under 60 seconds during Monday's campaign run.</p>
-              <a href="https://tiktok.com/@kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-secondary btn-sm">Watch on TikTok</a>
-            </div>
-          </article>
-
-          <article class="clip-card">
-            <div class="clip-top">
-              <span class="clip-tag">TIKTOK // HIGHLIGHT</span>
-              <span class="clip-stat">00:34</span>
-            </div>
-            <div class="clip-body">
-              <h4>When the Extraction Chopper Gets Ambushed</h4>
-              <p>Chat called the flank two seconds before the RPG came flying over the rooftop.</p>
-              <a href="https://tiktok.com/@kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-secondary btn-sm">Watch on TikTok</a>
-            </div>
-          </article>
+        <div class="empty-hud-state">
+          <span class="hud-pill">TIKTOK FEED // STANDBY</span>
+          <h3>No TikTok Field Clips Deployed Yet</h3>
+          <p>Short-form getaway escapes, stealth clears, and best stream moments from Twitch will be posted here soon. Follow @kodaplaygames on TikTok to catch the first drop.</p>
+          <a href="https://tiktok.com/@kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-primary btn-sm">Follow @kodaplaygames on TikTok</a>
         </div>
       </div>
 
-      <!-- Tab Panel 2: Instagram -->
+      <!-- Tab Panel 2: Instagram Empty/Standby State -->
       <div id="panel-instagram" class="tab-panel hidden" role="tabpanel" aria-labelledby="tab-instagram">
-        <div class="social-grid">
-          <article class="clip-card">
-            <div class="clip-top">
-              <span class="clip-tag">IG REEL // CAMPAIGN</span>
-              <span class="clip-stat">REEL</span>
-            </div>
-            <div class="clip-body">
-              <h4>Night Pursuit Highlights — Vice Streets</h4>
-              <p>Rain-slick roads, neon reflections, and a four-star pursuit edited into a 45-second reel.</p>
-              <a href="https://instagram.com/kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-secondary btn-sm">Open Instagram Reel</a>
-            </div>
-          </article>
-
-          <article class="clip-card">
-            <div class="clip-top">
-              <span class="clip-tag">IG REEL // LOADOUT</span>
-              <span class="clip-stat">REEL</span>
-            </div>
-            <div class="clip-body">
-              <h4>My Go-To Console Tactical Loadout &amp; Settings</h4>
-              <p>Controller sensitivity, HUD opacity, and audio mix settings I use for solo campaign runs.</p>
-              <a href="https://instagram.com/kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-secondary btn-sm">Open Instagram Reel</a>
-            </div>
-          </article>
-
-          <article class="clip-card">
-            <div class="clip-top">
-              <span class="clip-tag">IG POST // INTEL</span>
-              <span class="clip-stat">POST</span>
-            </div>
-            <div class="clip-body">
-              <h4>Next Solo Campaign Lineup Vote</h4>
-              <p>Drop your pick in the comments for next month's Monday &amp; Thursday playthrough series.</p>
-              <a href="https://instagram.com/kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-secondary btn-sm">View on Instagram</a>
-            </div>
-          </article>
+        <div class="empty-hud-state">
+          <span class="hud-pill">INSTAGRAM // STANDBY</span>
+          <h3>No Instagram Reels Deployed Yet</h3>
+          <p>Tactical highlights, console loadout breakdowns, and campaign previews are incoming. Follow @kodaplaygames on Instagram to be there from day one.</p>
+          <a href="https://instagram.com/kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-primary btn-sm">Follow @kodaplaygames on Instagram</a>
         </div>
       </div>
 
-      <!-- Tab Panel 3: X / Twitter -->
+      <!-- Tab Panel 3: X / Twitter Empty/Standby State -->
       <div id="panel-x" class="tab-panel hidden" role="tabpanel" aria-labelledby="tab-x">
-        <div class="x-feed-grid">
-          <article class="x-post-card">
-            <div class="x-post-header">
-              <div class="x-author">
-                <img src="./assets/logo-transparent.png" alt="KodaPlayGames" class="x-avatar-img" />
-                <div>
-                  <strong>KodaPlayGames</strong>
-                  <span class="x-handle">@kodaplaygames</span>
-                </div>
-              </div>
-              <span class="hud-pill">PINNED</span>
-            </div>
-            <p class="x-body">
-              Official KodaPlayGames Command Hub is live! Save this page to your phone's home screen for instant Twitch access (Mon &amp; Thurs 10AM UK), 15–30 min edited YouTube episodes, and tactical clips.
-            </p>
-            <div class="x-footer">
-              <span>Live on Twitch &bull; Edited on YouTube</span>
-              <a href="https://x.com/kodaplaygames" target="_blank" rel="noopener noreferrer">Follow on X &rarr;</a>
-            </div>
-          </article>
-
-          <article class="x-post-card">
-            <div class="x-post-header">
-              <div class="x-author">
-                <img src="./assets/logo-transparent.png" alt="KodaPlayGames" class="x-avatar-img" />
-                <div>
-                  <strong>KodaPlayGames</strong>
-                  <span class="x-handle">@kodaplaygames</span>
-                </div>
-              </div>
-              <span class="x-time">DEPLOYMENT</span>
-            </div>
-            <p class="x-body">
-              Console stream kicks off at 10:00 AM UK on Twitch! Continuing our solo tactical playthrough—no HUD assists, hard difficulty. Join the comms early.
-            </p>
-            <div class="x-footer">
-              <span>Mon &amp; Thurs 10AM UK</span>
-              <a href="https://x.com/kodaplaygames" target="_blank" rel="noopener noreferrer">View Post &rarr;</a>
-            </div>
-          </article>
-
-          <article class="x-post-card">
-            <div class="x-post-header">
-              <div class="x-author">
-                <img src="./assets/logo-transparent.png" alt="KodaPlayGames" class="x-avatar-img" />
-                <div>
-                  <strong>KodaPlayGames</strong>
-                  <span class="x-handle">@kodaplaygames</span>
-                </div>
-              </div>
-              <span class="x-time">NEW EPISODE</span>
-            </div>
-            <p class="x-body">
-              New 22-minute edited episode just dropped on YouTube! Cut down from Thursday's getaway run with all the best chases and zero downtime.
-            </p>
-            <div class="x-footer">
-              <span>Edited 15–30m Cut</span>
-              <a href="https://x.com/kodaplaygames" target="_blank" rel="noopener noreferrer">View Post &rarr;</a>
-            </div>
-          </article>
+        <div class="empty-hud-state">
+          <span class="hud-pill">X COMMS // STANDBY</span>
+          <h3>No X / Twitter Dispatches Yet</h3>
+          <p>Live stream go-live alerts, schedule updates, and new 15–30 minute YouTube episode announcements will appear here once comms go active.</p>
+          <a href="https://x.com/kodaplaygames" target="_blank" rel="noopener noreferrer" class="btn btn-hud-primary btn-sm">Follow @kodaplaygames on X</a>
         </div>
       </div>
     </section>
